@@ -2,7 +2,7 @@ import { ADD_BOOKING, DELETE_BOOKING } from "./actionTypes";
 
 const initialState = [
   {
-    id: 0,
+    id: 1,
     from: "Dhaka",
     to: "Sylhet",
     date: "02/08/2023",
@@ -14,8 +14,8 @@ const initialState = [
 const bookingReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_BOOKING:
-      if (state.length < 3) {
-        return [...state, action.payload];
+      if (state.length < 3 && action.payload.from !== action.payload.to) {
+        return [...state, { id: state.length + 1, ...action.payload }];
       } else {
         return state;
       }
