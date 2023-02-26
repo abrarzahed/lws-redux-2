@@ -11,6 +11,7 @@ const initialState = [
     id: 0,
     text: "learn react",
     completed: true,
+    color: "green",
   },
   {
     id: 1,
