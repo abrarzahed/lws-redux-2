@@ -4,12 +4,16 @@ import {
   CLEAR_COMPLETED,
   COLOR_SELECTED,
   DELETED,
+  LOADED,
   TOGGLED,
 } from "./actionsTypes";
 const initialState = [];
 
 const todosReducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOADED:
+      return [...state, ...action.payload];
+
     case ADDED:
       return [...state, { id: state.length + 1, text: action.payload }];
 
