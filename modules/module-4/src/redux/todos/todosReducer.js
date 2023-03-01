@@ -6,20 +6,7 @@ import {
   DELETED,
   TOGGLED,
 } from "./actionsTypes";
-const initialState = [
-  {
-    id: 0,
-    text: "learn react",
-    completed: true,
-    color: "green",
-  },
-  {
-    id: 1,
-    text: "learn redux",
-    completed: false,
-    color: "red",
-  },
-];
+const initialState = [];
 
 const todosReducer = (state = initialState, action) => {
   switch (action.type) {
