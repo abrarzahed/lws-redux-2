@@ -1,12 +1,12 @@
-import React from "react";
 import SearchBook from "./SearchBook";
+import logoImage from "../assets/logo.svg";
 
 export default function Header() {
   return (
     <nav className="py-4 2xl:px-6">
       <div className="container flex items-center justify-between">
         <img
-          src="./images/logo.svg"
+          src={logoImage}
           width="150px"
           alt="logo"
           className="object-contain"
