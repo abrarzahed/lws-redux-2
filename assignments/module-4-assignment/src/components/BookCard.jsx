@@ -1,5 +1,6 @@
 export default function BookCard({ book = {} }) {
   const { featured, name, author, thumbnail, price } = book;
+
   return (
     <div className="book-card">
       <img
