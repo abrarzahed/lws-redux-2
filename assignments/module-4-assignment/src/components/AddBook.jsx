@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import addBook from "../redux/books/thunks/addBook";
 import updateBook from "../redux/books/thunks/updateBook";
+import { itemToUpdateSelected } from "../redux/filter/action";
 
 export default function AddBook() {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ export default function AddBook() {
     e.preventDefault();
     if (itemToUpdate) {
       dispatch(updateBook(itemToUpdate.id, formData));
+      dispatch(itemToUpdateSelected(null));
     } else if (!itemToUpdate) {
       dispatch(addBook(formData));
     }
