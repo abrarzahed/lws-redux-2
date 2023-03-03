@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import deleteBook from "../redux/books/thunks/deleteBook";
+import { itemToUpdateSelected } from "../redux/filter/action";
 
 export default function BookCard({ book = {} }) {
   const { id, featured, name, author, thumbnail, price } = book;
@@ -9,6 +10,11 @@ export default function BookCard({ book = {} }) {
   // handle delete book
   const handleDeleteBook = () => {
     dispatch(deleteBook(id));
+  };
+
+  // handle select item to update
+  const handleSelectItemToUpdate = () => {
+    dispatch(itemToUpdateSelected(book));
   };
 
   return (
@@ -24,7 +30,7 @@ export default function BookCard({ book = {} }) {
             <span className="badge-success lws-Badge">featured</span>
           )}
           <div className="text-gray-500 space-x-2">
-            <button className="lws-edit">
+            <button className="lws-edit" onClick={handleSelectItemToUpdate}>
               <svg
                 fill="none"
                 viewBox="0 0 24 24"

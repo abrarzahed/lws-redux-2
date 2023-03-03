@@ -19,10 +19,13 @@ export const bookAdded = (book) => {
   };
 };
 
-export const bookUpdated = (book) => {
+export const bookUpdated = (bookId, bookData) => {
   return {
     type: BOOK_UPDATED,
-    payload: book,
+    payload: {
+      bookId,
+      bookData,
+    },
   };
 };
 

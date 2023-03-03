@@ -1,9 +1,18 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import addBook from "../redux/books/thunks/addBook";
+import updateBook from "../redux/books/thunks/updateBook";
 
 export default function AddBook() {
   const dispatch = useDispatch();
+
+  const itemToUpdate = useSelector((state) => state.filters.itemToUpdate);
+
+  useEffect(() => {
+    if (itemToUpdate) {
+      setFormData(itemToUpdate);
+    }
+  }, [itemToUpdate]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -39,7 +48,11 @@ export default function AddBook() {
   // handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addBook(formData));
+    if (itemToUpdate) {
+      dispatch(updateBook(itemToUpdate.id, formData));
+    } else if (!itemToUpdate) {
+      dispatch(addBook(formData));
+    }
     resetForm();
   };
 
@@ -132,7 +145,7 @@ export default function AddBook() {
         </div>
 
         <button type="submit" className="submit" id="submit">
-          Add Book
+          {itemToUpdate ? "Update Book" : "Add Book"}
         </button>
       </form>
     </div>
