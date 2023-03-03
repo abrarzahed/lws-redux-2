@@ -60,7 +60,9 @@ export default function AddBook() {
 
   return (
     <div className="p-4 overflow-hidden bg-white shadow-cardShadow rounded-md">
-      <h4 className="mb-8 text-xl font-bold text-center">Add New Book</h4>
+      <h4 className="mb-8 text-xl font-bold text-center">
+        {itemToUpdate ? "Update This Book" : "Add New Book"}
+      </h4>
       <form className="book-form" onSubmit={handleSubmit}>
         <div className="space-y-2">
           <label htmlFor="name">Book Name</label>
