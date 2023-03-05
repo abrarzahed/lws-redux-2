@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.3",
+    "node-fetch": "^3.3.0",
+    "redux": "^4.2.1",
+    "redux-logger": "^3.0.6"
+  }
+}
