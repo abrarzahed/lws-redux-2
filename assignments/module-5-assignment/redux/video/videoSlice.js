@@ -1,5 +1,4 @@
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
-
 const fetch = require("node-fetch");
 
 // initial state
@@ -7,12 +6,14 @@ const initialState = {
   loading: false,
   video: null,
   error: "",
+  relatedVideos: [],
 };
 
 // create async thunk
 const fetchVideo = createAsyncThunk("video/fetchVideo", async () => {
   const res = await fetch("http://localhost:9000/videos");
   const video = await res.json();
+
   return video;
 });
 
@@ -25,6 +26,7 @@ const videoSlice = createSlice({
         state.loading = true;
         state.video = null;
         state.error = "";
+        state.relatedVideos = [];
       })
       .addCase(fetchVideo.fulfilled, (state, action) => {
         state.loading = false;
@@ -35,6 +37,7 @@ const videoSlice = createSlice({
         state.loading = false;
         state.video = null;
         state.error = action.error.message;
+        state.relatedVideos = [];
       });
   },
 });
