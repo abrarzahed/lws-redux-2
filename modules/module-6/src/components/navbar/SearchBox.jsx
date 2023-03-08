@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useMatch, useNavigate } from "react-router-dom";
 import { searchTermUpdated } from "../../features/filter/filterSlice";
 
 export default function SearchBox() {
   const { searchTerm } = useSelector((state) => state.filters);
   const [input, setInput] = useState(searchTerm);
   const dispatch = useDispatch();
+
+  const match = useMatch("/");
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setInput(e.target.value);
@@ -15,6 +19,11 @@ export default function SearchBox() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(searchTermUpdated(input));
+
+    // if user is not in home page, redirect to home page
+    if (!match) {
+      navigate("/");
+    }
   };
 
   return (

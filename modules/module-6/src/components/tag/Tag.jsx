@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { tagRemoved, tagSelected } from "../../features/filter/filterSlice";
 
 export default function Tag({ tag = {} }) {
-  const { tags, searchTerm } = useSelector((state) => state.filters);
+  const { tags } = useSelector((state) => state.filters);
   const dispatch = useDispatch();
 
   const { title } = tag;
