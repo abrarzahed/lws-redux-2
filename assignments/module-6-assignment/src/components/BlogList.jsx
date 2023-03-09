@@ -17,6 +17,34 @@ export default function BlogList() {
     dispatch(fetchPostsAsync());
   }, [dispatch, sortedBy, filteredBy]);
 
+  // filter posts
+  const filterPosts = (post) => {
+    if (filteredBy === "saved") {
+      return post.isSaved;
+    } else {
+      return true;
+    }
+  };
+
+  const convertDateInMilliseconds = (date) => {
+    return new Date(date).getTime();
+  };
+
+  // sort posts
+  const sortedPosts = () => {
+    if (sortedBy === "default") {
+      return [...posts];
+    } else if (sortedBy === "newest") {
+      return [...posts].sort((a, b) => {
+        const dateInMillisecondsA = convertDateInMilliseconds(a.createdAt);
+        const dateInMillisecondsB = convertDateInMilliseconds(b.createdAt);
+        return dateInMillisecondsB - dateInMillisecondsA;
+      });
+    } else {
+      return [...posts].sort((a, b) => b.likes - a.likes);
+    }
+  };
+
   // decide what to render
   let content;
   if (isLoading) content = <Loader />;
@@ -27,16 +55,8 @@ export default function BlogList() {
     content = <div>No posts found</div>;
   }
   if (!isLoading && !isLoading && posts.length > 0) {
-    content = posts
-      .filter((post) => {
-        if (filteredBy === "all") {
-          return true;
-        } else if (filteredBy === "saved") {
-          return post.isSaved;
-        } else {
-          return false;
-        }
-      })
+    content = sortedPosts()
+      .filter(filterPosts)
       .map((post) => <BlogCard key={post.id} post={post} />);
   }
 
