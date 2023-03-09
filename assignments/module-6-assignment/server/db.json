@@ -10,8 +10,8 @@
         "nodejs",
         "react"
       ],
-      "likes": 8,
-      "isSaved": false,
+      "likes": 11,
+      "isSaved": true,
       "createdAt": "2020-07-15"
     },
     {
@@ -24,8 +24,8 @@
         "nodejs",
         "react"
       ],
-      "likes": 16,
-      "isSaved": false,
+      "likes": 21,
+      "isSaved": true,
       "createdAt": "2022-07-15"
     },
     {
@@ -110,7 +110,7 @@
         "javascript"
       ],
       "likes": 24,
-      "isSaved": false,
+      "isSaved": true,
       "createdAt": "2022-11-13"
     }
   ]

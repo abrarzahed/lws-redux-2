@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getPosts, updatePostSaved } from "./postsApi";
+import { getPosts } from "./postsApi";
 
 const initialState = {
   isLoading: false,

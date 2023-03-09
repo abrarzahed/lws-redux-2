@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getPost, updatePostSaved } from "./postApi";
+import { getPost, updatePostLikes, updatePostSaved } from "./postApi";
 
 const initialState = {
   isLoading: false,
@@ -20,6 +20,14 @@ export const updateSaveAsync = createAsyncThunk(
   "post/updateSave",
   async (postToUpdate) => {
     const post = await updatePostSaved(postToUpdate);
+    return post;
+  }
+);
+
+export const updatePostLikesAsync = createAsyncThunk(
+  "post/updatePostLikes",
+  async (postToUpdate) => {
+    const post = await updatePostLikes(postToUpdate);
     return post;
   }
 );
@@ -46,13 +54,13 @@ const postSlice = createSlice({
         state.post = {};
         state.isError = true;
         state.error = action.error?.message;
-      })
-      .addCase(updateSaveAsync.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.post = action.payload;
-        state.isError = false;
-        state.error = "";
       });
+    builder.addCase(updateSaveAsync.fulfilled, (state, action) => {
+      state.post = action.payload;
+    });
+    builder.addCase(updatePostLikesAsync.fulfilled, (state, action) => {
+      state.post = action.payload;
+    });
   },
 });
 

@@ -12,3 +12,11 @@ export const updatePostSaved = async (post) => {
   });
   return response.data;
 };
+export const updatePostLikes = async (post) => {
+  console.log("post", post);
+  const response = await axiosInstance.patch(`/blogs/${post?.id}`, {
+    ...post,
+    likes: Number(post.likes) + 1,
+  });
+  return response.data;
+};

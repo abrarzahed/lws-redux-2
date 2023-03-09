@@ -1,5 +1,8 @@
 import { useDispatch } from "react-redux";
-import { updateSaveAsync } from "../features/post/postSlice";
+import {
+  updatePostLikesAsync,
+  updateSaveAsync,
+} from "../features/post/postSlice";
 
 export default function SinglePostDetail({ post = {} }) {
   const { id, title, image, tags, likes, description, isSaved, createdAt } =
@@ -9,6 +12,11 @@ export default function SinglePostDetail({ post = {} }) {
   // handleUpdateSave
   const handleUpdateSave = () => {
     dispatch(updateSaveAsync(post));
+  };
+
+  // handle update likes
+  const handleUpdateLikes = () => {
+    dispatch(updatePostLikesAsync(post));
   };
 
   return (
@@ -30,7 +38,11 @@ export default function SinglePostDetail({ post = {} }) {
         </div>
         <div className="btn-group">
           {/* <!-- handle like on button click --> */}
-          <button className="like-btn" id="lws-singleLinks">
+          <button
+            className="like-btn"
+            id="lws-singleLinks"
+            onClick={handleUpdateLikes}
+          >
             <i className="fa-regular fa-thumbs-up"></i> {likes}
           </button>
 
