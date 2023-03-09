@@ -1,6 +1,15 @@
+import { useDispatch } from "react-redux";
+import { updateSaveAsync } from "../features/post/postSlice";
+
 export default function SinglePostDetail({ post = {} }) {
   const { id, title, image, tags, likes, description, isSaved, createdAt } =
     post;
+  const dispatch = useDispatch();
+
+  // handleUpdateSave
+  const handleUpdateSave = () => {
+    dispatch(updateSaveAsync(post));
+  };
 
   return (
     <main className="post">
@@ -28,6 +37,7 @@ export default function SinglePostDetail({ post = {} }) {
           <button
             className={`${isSaved && "active"} save-btn`}
             id="lws-singleSavedBtn"
+            onClick={handleUpdateSave}
           >
             <i className="fa-regular fa-bookmark"></i>{" "}
             {isSaved ? "Saved" : "Save"}

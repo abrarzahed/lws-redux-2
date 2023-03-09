@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getPost } from "./postApi";
+import { getPost, updatePostSaved } from "./postApi";
 
 const initialState = {
   isLoading: false,
@@ -12,6 +12,14 @@ export const fetchPostAsync = createAsyncThunk(
   "posts/fetchPost",
   async (blogId) => {
     const post = await getPost(blogId);
+    return post;
+  }
+);
+
+export const updateSaveAsync = createAsyncThunk(
+  "post/updateSave",
+  async (postToUpdate) => {
+    const post = await updatePostSaved(postToUpdate);
     return post;
   }
 );
@@ -38,6 +46,12 @@ const postSlice = createSlice({
         state.post = {};
         state.isError = true;
         state.error = action.error?.message;
+      })
+      .addCase(updateSaveAsync.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.post = action.payload;
+        state.isError = false;
+        state.error = "";
       });
   },
 });
