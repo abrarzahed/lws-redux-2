@@ -9,12 +9,13 @@ export default function BlogList() {
   const { isLoading, isError, error, posts } = useSelector(
     (state) => state.posts
   );
+  const { sortedBy, filteredBy } = useSelector((state) => state.filters);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchPostsAsync());
-  }, [dispatch]);
+  }, [dispatch, sortedBy, filteredBy]);
 
   // decide what to render
   let content;
@@ -26,7 +27,17 @@ export default function BlogList() {
     content = <div>No posts found</div>;
   }
   if (!isLoading && !isLoading && posts.length > 0) {
-    content = posts.map((post) => <BlogCard key={post.id} post={post} />);
+    content = posts
+      .filter((post) => {
+        if (filteredBy === "all") {
+          return true;
+        } else if (filteredBy === "saved") {
+          return post.isSaved;
+        } else {
+          return false;
+        }
+      })
+      .map((post) => <BlogCard key={post.id} post={post} />);
   }
 
   return (
