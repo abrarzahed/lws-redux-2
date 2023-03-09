@@ -23,11 +23,11 @@ export default function BlogCard({ post = {} }) {
             <span key={i}>#{tag}</span>
           ))}
         </div>
-        {/* <!-- Show this element if post is saved --> */}
-        <div className="flex gap-2 mt-4">
-          <span className="lws-badge"> Saved </span>
-        </div>
-        {/* <!-- Show this element if post is saved Ends --> */}
+        {isSaved && (
+          <div className="flex gap-2 mt-4">
+            <span className="lws-badge"> Saved </span>
+          </div>
+        )}
       </div>
     </div>
   );
