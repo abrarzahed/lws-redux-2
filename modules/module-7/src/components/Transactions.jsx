@@ -4,7 +4,7 @@ import deleteIcon from "../assets/delete.svg";
 export default function Transactions() {
   return (
     <>
-      <p class="second_heading">Your Transactions:</p>
+      <p className="second_heading">Your Transactions:</p>
 
       <div className="conatiner_of_list_of_transactions">
         <ul>

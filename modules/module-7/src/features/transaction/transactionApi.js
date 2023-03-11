@@ -1,4 +1,5 @@
 import axiosInstance from "../../utils/axios";
+
 export const getTransactions = async () => {
   const response = await axiosInstance.get("/transactions");
   return response.data;
@@ -15,6 +16,6 @@ export const editTransaction = async ({ id, data }) => {
 };
 
 export const deleteTransaction = async (id) => {
-  const response = await axiosInstance.delete(`/transactions/${id}`);
-  return response.data;
+  await axiosInstance.delete(`/transactions/${id}`);
+  return id;
 };
