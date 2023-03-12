@@ -2,7 +2,11 @@ import editIcon from "../assets/edit.svg";
 import deleteIcon from "../assets/delete.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchTransactionsAsync } from "../features/transaction/transactionSlice";
+import {
+  deleteTransactionsAsync,
+  fetchTransactionsAsync,
+  itemToEditSelected,
+} from "../features/transaction/transactionSlice";
 
 export default function Transactions() {
   const dispatch = useDispatch();
@@ -13,6 +17,17 @@ export default function Transactions() {
   useEffect(() => {
     dispatch(fetchTransactionsAsync());
   }, [dispatch]);
+
+  // handle edit
+  const handleEdit = (transaction) => {
+    dispatch(itemToEditSelected(transaction));
+  };
+
+  // handle delete
+  const handleDelete = (id) => {
+    dispatch(deleteTransactionsAsync(id));
+  };
+
   return (
     <>
       {!isLoading && !isError && transactions.length > 0 ? (
@@ -28,10 +43,16 @@ export default function Transactions() {
                   <p>{transaction.name}</p>
                   <div className="right">
                     <p>৳ {transaction.amount}</p>
-                    <button className="link">
+                    <button
+                      className="link"
+                      onClick={() => handleEdit(transaction)}
+                    >
                       <img className="icon" src={editIcon} alt="edit icon" />
                     </button>
-                    <button className="link">
+                    <button
+                      className="link"
+                      onClick={() => handleDelete(transaction.id)}
+                    >
                       <img
                         className="icon"
                         src={deleteIcon}

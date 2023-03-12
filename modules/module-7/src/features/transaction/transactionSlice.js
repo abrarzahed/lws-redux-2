@@ -15,6 +15,7 @@ const initialState = {
   isError: false,
   error: "",
   transactions: [],
+  itemToEdit: {},
 };
 
 /* 
@@ -62,6 +63,14 @@ export const deleteTransactionsAsync = createAsyncThunk(
 const transactionsSlice = createSlice({
   name: "transactions",
   initialState,
+  reducers: {
+    itemToEditSelected: (state, action) => {
+      state.itemToEdit = action.payload;
+    },
+    itemToEditDeselected: (state) => {
+      state.itemToEdit = {};
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTransactionsAsync.pending, (state, action) => {
@@ -127,3 +136,5 @@ const transactionsSlice = createSlice({
 });
 
 export default transactionsSlice.reducer;
+export const { itemToEditSelected, itemToEditDeselected } =
+  transactionsSlice.actions;

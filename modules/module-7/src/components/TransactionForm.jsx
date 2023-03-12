@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTransactionsAsync } from "../features/transaction/transactionSlice";
+import {
+  addTransactionsAsync,
+  editTransactionsAsync,
+  itemToEditDeselected,
+} from "../features/transaction/transactionSlice";
 
 export default function TransactionForm() {
   const dispatch = useDispatch();
 
-  const { isLoading, isError, error } = useSelector(
+  const { isLoading, isError, error, itemToEdit } = useSelector(
     (state) => state.transactions
   );
 
@@ -15,6 +19,12 @@ export default function TransactionForm() {
     amount: "",
   });
 
+  useEffect(() => {
+    if (itemToEdit?.id) {
+      setFormData(itemToEdit);
+    }
+  }, [itemToEdit]);
+
   // reset form
   const resetForm = () => {
     setFormData({
@@ -22,6 +32,12 @@ export default function TransactionForm() {
       type: "income",
       amount: "",
     });
+  };
+
+  // cancel edit
+  const cancelEdit = () => {
+    dispatch(itemToEditDeselected());
+    resetForm();
   };
 
   // handle input change
@@ -38,9 +54,24 @@ export default function TransactionForm() {
   // handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      addTransactionsAsync({ ...formData, amount: Number(formData.amount) })
-    );
+    if (itemToEdit?.id) {
+      dispatch(
+        editTransactionsAsync({
+          id: itemToEdit?.id,
+          data: {
+            ...formData,
+            amount: Number(formData.amount),
+          },
+        })
+      );
+
+      dispatch(itemToEditDeselected());
+    } else {
+      dispatch(
+        addTransactionsAsync({ ...formData, amount: Number(formData.amount) })
+      );
+    }
+
     resetForm();
   };
 
@@ -100,12 +131,16 @@ export default function TransactionForm() {
         </div>
 
         <button disabled={isLoading} className="btn">
-          Add Transaction
+          {itemToEdit?.id ? "Update Transaction" : "Add Transaction"}
         </button>
         {!isLoading && isError && <p className="error">{error}</p>}
       </form>
 
-      <button className="btn cancel_edit">Cancel Edit</button>
+      {itemToEdit?.id && (
+        <button className="btn cancel_edit" onClick={cancelEdit}>
+          Cancel Edit
+        </button>
+      )}
     </div>
   );
 }

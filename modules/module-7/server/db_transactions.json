@@ -4,13 +4,13 @@
       "id": 1,
       "name": "Salary from Google",
       "type": "income",
-      "amount": 1000000
+      "amount": 10000
     },
     {
       "id": 2,
       "name": "Family Expenses",
       "type": "expense",
-      "amount": 200000
+      "amount": 2000
     }
   ]
 }
