@@ -19,6 +19,7 @@ export default function TransactionForm() {
     amount: "",
   });
 
+  // tract item to edit
   useEffect(() => {
     if (itemToEdit?.id) {
       setFormData(itemToEdit);
