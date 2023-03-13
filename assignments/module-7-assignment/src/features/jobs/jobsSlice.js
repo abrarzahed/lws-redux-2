@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getJobs } from "./jobsApi";
+import { addJob, deleteJob, editJob, getJobs } from "./jobsApi";
 
 const initialState = {
   isLoading: false,
@@ -16,20 +16,20 @@ export const getJobsAsync = createAsyncThunk("jobs/getJobs", async () => {
 });
 
 export const addJobAsync = createAsyncThunk("jobs/addJob", async (jobData) => {
-  const job = getJobs(jobData);
+  const job = addJob(jobData);
   return job;
 });
 
 export const editJobAsync = createAsyncThunk(
   "jobs/editJob",
   async (jobData) => {
-    const job = getJobs(jobData);
+    const job = editJob(jobData);
     return job;
   }
 );
 
 export const deleteJobAsync = createAsyncThunk("jobs/deleteJob", async (id) => {
-  const jobId = getJobs(id);
+  const jobId = deleteJob(id);
   return jobId;
 });
 

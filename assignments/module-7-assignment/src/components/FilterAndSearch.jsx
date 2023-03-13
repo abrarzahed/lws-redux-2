@@ -10,7 +10,7 @@ export default function FilterAndSearch() {
           id="lws-searchJob"
         />
       </div>
-      <select id="lws-sort" name="sort" autocomplete="sort" className="flex-1">
+      <select id="lws-sort" name="sort" autoComplete="sort" className="flex-1">
         <option>Default</option>
         <option>Salary (Low to High)</option>
         <option>Salary (High to Low)</option>
