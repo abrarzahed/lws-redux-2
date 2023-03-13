@@ -66,13 +66,13 @@ const jobsSlice = createSlice({
       })
       .addCase(addJobAsync.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = false;
         state.error = "";
         state.jobs = [...state.jobs, action.payload];
       })
       .addCase(editJobAsync.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = false;
         state.error = "";
         state.jobs = state.jobs.map((job) => {
           if (job.id === action.payload.id) {
@@ -84,7 +84,7 @@ const jobsSlice = createSlice({
       })
       .addCase(deleteJobAsync.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = false;
         state.error = "";
         state.jobs = state.jobs.filter((job) => job.id !== action.payload);
       });

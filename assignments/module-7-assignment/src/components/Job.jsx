@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { jobToEditSelected } from "../features/jobs/jobsSlice";
+import { useNavigate } from "react-router-dom";
+import { deleteJobAsync, jobToEditSelected } from "../features/jobs/jobsSlice";
 
 export default function Job({ job = {} }) {
   const dispatch = useDispatch();
@@ -8,10 +8,15 @@ export default function Job({ job = {} }) {
 
   const { id, title, salary, type, deadline } = job;
 
-  // handle edit
+  // handle edit job
   const handleEdit = () => {
     dispatch(jobToEditSelected(job));
     navigate(`/editJob/${id}`);
+  };
+
+  // handle delete job
+  const handleDelete = () => {
+    dispatch(deleteJobAsync(id));
   };
 
   return (
@@ -50,7 +55,11 @@ export default function Job({ job = {} }) {
         </span>
 
         <span className="sm:ml-3">
-          <button type="button" className="lws-delete btn btn-danger">
+          <button
+            type="button"
+            className="lws-delete btn btn-danger"
+            onClick={handleDelete}
+          >
             <i className="fa-solid fa-trash text-gray-300 -ml-1 mr-2"></i>
             Delete
           </button>
