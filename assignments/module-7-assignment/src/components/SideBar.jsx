@@ -1,6 +1,14 @@
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { jobToEditDeselected } from "../features/jobs/jobsSlice";
 
 export default function SideBar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleNavigateToAddJob = () => {
+    dispatch(jobToEditDeselected());
+    navigate("/addJob");
+  };
   return (
     <div className="sidebar">
       <nav>
@@ -32,10 +40,14 @@ export default function SideBar() {
             </ul>
           </li>
           <li>
-            <Link to="/addJob" className="main-menu" id="lws-addJob-menu">
+            <button
+              className="main-menu"
+              id="lws-addJob-menu"
+              onClick={handleNavigateToAddJob}
+            >
               <i className="fa-solid fa-file-circle-plus mr-2"></i>
               <span>Add NewJob</span>
-            </Link>
+            </button>
           </li>
         </ul>
       </nav>

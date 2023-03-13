@@ -45,10 +45,8 @@ export default function AddAndEditForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (jobToEdit?.id) {
-      console.log("edit");
       dispatch(editJobAsync(formData));
     } else {
-      console.log("add");
       dispatch(addJobAsync(formData));
     }
     resetForm();

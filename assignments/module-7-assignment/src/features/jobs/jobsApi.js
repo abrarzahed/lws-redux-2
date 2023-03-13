@@ -6,7 +6,6 @@ export const getJobs = async () => {
 };
 
 export const addJob = async (jobData) => {
-  console.log("add");
   const response = await axiosInstance.post("/jobs", jobData);
   return response.data;
 };

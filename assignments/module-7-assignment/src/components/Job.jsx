@@ -1,14 +1,25 @@
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { jobToEditSelected } from "../features/jobs/jobsSlice";
 
 export default function Job({ job = {} }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { id, title, salary, type, deadline } = job;
+
+  // handle edit
+  const handleEdit = () => {
+    dispatch(jobToEditSelected(job));
+    navigate(`/editJob/${id}`);
+  };
+
   return (
     <div className="lws-single-job">
       <div className="flex-1 min-w-0">
         <h2 className="lws-title">{title}</h2>
         <div className="job-footers">
           <div className="lws-type">
-            {/* <!-- Fulltime - #FF8A00,  --><!-- Internship - #FF5757,  --><!-- Remote - #56E5C4,  --> */}
             <i
               className={`fa-solid fa-stop !text-[${
                 type === "Full Time"
@@ -32,10 +43,10 @@ export default function Job({ job = {} }) {
       </div>
       <div className="mt-5 flex lg:mt-0 lg:ml-4">
         <span className="hidden sm:block">
-          <Link to={`/editJob/${id}`} className="lws-edit btn btn-primary">
+          <button className="lws-edit btn btn-primary" onClick={handleEdit}>
             <i className="fa-solid fa-pen text-gray-300 -ml-1 mr-2"></i>
             Edit
-          </Link>
+          </button>
         </span>
 
         <span className="sm:ml-3">
