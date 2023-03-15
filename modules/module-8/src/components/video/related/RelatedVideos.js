@@ -1,6 +1,5 @@
 import { useGetRelatedVideosQuery } from "../../../features/api/apiSlice";
 import Error from "../../ui/Error";
-import DescriptionLoader from "../../ui/loaders/DescriptionLoader";
 import RelatedVideoLoader from "../../ui/loaders/RelatedVideoLoader";
 import RelatedVideo from "./RelatedVideo";
 
@@ -9,7 +8,6 @@ export default function RelatedVideos({ id, title }) {
     data: relatedVideos,
     isLoading,
     isError,
-    error,
   } = useGetRelatedVideosQuery({ id, title });
 
   let content = null;
