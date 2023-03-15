@@ -17,7 +17,7 @@ export const apiSlice = createApi({
           .split(" ")
           .map((tag) => `title_like=${tag}`)
           .join("&");
-        return `/videos?${queryString}&_limit=4`;
+        return `/videos?${queryString}&_limit=4&id_ne=${id}`;
       },
     }),
   }),
