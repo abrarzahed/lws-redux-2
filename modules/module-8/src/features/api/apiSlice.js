@@ -5,6 +5,7 @@ export const apiSlice = createApi({
     baseUrl: "http://localhost:9000",
   }),
   endpoints: (builder) => ({
+    //===  queries (get requests)  ===//
     getVideos: builder.query({
       query: () => "/videos",
       keepUnusedDataFor: 600,
@@ -21,8 +22,21 @@ export const apiSlice = createApi({
         return `/videos?${queryString}&_limit=4&id_ne=${id}`;
       },
     }),
+
+    //=== mutations (post, patch, delete requests)  ===//
+    addVideo: builder.mutation({
+      query: (data) => ({
+        url: `/videos`,
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetVideosQuery, useGetVideoQuery, useGetRelatedVideosQuery } =
-  apiSlice;
+export const {
+  useGetVideosQuery,
+  useGetVideoQuery,
+  useGetRelatedVideosQuery,
+  useAddVideoMutation,
+} = apiSlice;
