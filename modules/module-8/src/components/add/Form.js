@@ -7,8 +7,7 @@ import Success from "../ui/Success";
 import Error from "../ui/Error";
 
 export default function Form() {
-  const [addVideo, { data: video, isLoading, isError, error, isSuccess }] =
-    useAddVideoMutation();
+  const [addVideo, { isLoading, isError, isSuccess }] = useAddVideoMutation();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -43,13 +42,13 @@ export default function Form() {
         [name]: value,
       };
     });
-    resetForm();
   };
 
   //   handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
     addVideo(formData);
+    resetForm();
   };
 
   return (
