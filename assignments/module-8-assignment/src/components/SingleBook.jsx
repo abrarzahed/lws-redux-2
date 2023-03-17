@@ -1,18 +1,22 @@
 import { Link } from "react-router-dom";
 
-export default function SingleBook() {
+export default function SingleBook({ book = {} }) {
+  const { id, name, author, thumbnail, featured, price } = book;
   return (
     <div className="book-card">
       <img
         className="h-[240px] w-[170px] object-cover"
-        src="https://m.media-amazon.com/images/P/B07DZ86WP7.01._SCLZZZZZZZ_SX500_.jpg"
+        src={thumbnail}
         alt="book"
       />
       <div className="flex-1 h-full pr-2 pt-2 flex flex-col">
-        <div className="flex items-center justify-between">
-          <span className="lws-badge">featured</span>
-          <div className="text-gray-500 flex space-x-2">
-            <Link to={`/editBook/1`} className="lws-edit">
+        <div className="flex items-center  justify-between">
+          {featured && <span className="lws-badge">featured</span>}
+          <div
+            style={{ marginLeft: "auto" }}
+            className="text-gray-500 flex space-x-2"
+          >
+            <Link to={`/editBook/${id}`} className="lws-edit">
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
@@ -46,10 +50,8 @@ export default function SingleBook() {
         </div>
 
         <div className="space-y-2 mt-4 h-full">
-          <h4 className="lws-book-name">
-            Life Hurts: A Doctor's Personal Journey Through Anorexia
-          </h4>
-          <p className="lws-author">Dr Elizabeth McNaught</p>
+          <h4 className="lws-book-name">{name}</h4>
+          <p className="lws-author">{author}</p>
           <div className="lws-stars">
             <svg viewBox="0 0 20 20" fill="currentColor" className="star">
               <path
@@ -75,7 +77,7 @@ export default function SingleBook() {
               />
             </svg>
           </div>
-          <p className="lws-price">BDT 14</p>
+          <p className="lws-price">BDT {price}</p>
         </div>
       </div>
     </div>
