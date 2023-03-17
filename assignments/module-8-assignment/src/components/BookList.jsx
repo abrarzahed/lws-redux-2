@@ -5,7 +5,7 @@ import SingleBook from "./SingleBook";
 export default function BookList() {
   const { data: books, isLoading, isError, error } = useGetBooksQuery();
 
-  const { category } = useSelector((state) => state.filters);
+  const { searchTerm, category } = useSelector((state) => state.filters);
 
   // filter by category
   const filterByCategory = (book) => {
@@ -13,6 +13,21 @@ export default function BookList() {
       return true;
     } else {
       return book.featured;
+    }
+  };
+
+  // filter by search term
+  const filterBySearchTerm = (book) => {
+    if (searchTerm === "") {
+      return true;
+    } else if (
+      book.name.includes(searchTerm) ||
+      book.name.toUpperCase().includes(searchTerm) ||
+      book.name.toLowerCase().includes(searchTerm.toLowerCase())
+    ) {
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -28,6 +43,7 @@ export default function BookList() {
   if (!isLoading && !isError && books?.length > 0) {
     content = books
       .filter(filterByCategory)
+      .filter(filterBySearchTerm)
       .map((book) => <SingleBook key={book.id} book={book} />);
   }
   return (

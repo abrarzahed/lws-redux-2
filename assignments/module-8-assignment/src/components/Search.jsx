@@ -1,6 +1,19 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { searchTermChanged } from "../features/filters/filterSlice";
+
 export default function Search() {
+  const dispatch = useDispatch();
+  const [input, setInput] = useState("");
+
+  // handle submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(searchTermChanged(input));
+  };
+
   return (
-    <form className="flex items-center">
+    <form className="flex items-center" onSubmit={handleSubmit}>
       <div className="group relative rounded-md bg-white">
         <svg
           width="20"
@@ -16,9 +29,11 @@ export default function Search() {
         </svg>
         <input
           type="text"
-          placeholder="Filter books..."
+          placeholder="Search books..."
           className="search"
           id="lws-search"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
         />
       </div>
     </form>
