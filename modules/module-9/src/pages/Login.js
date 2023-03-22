@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
 import Error from "../components/ui/Error";
 import { useLoginMutation } from "../features/auth/authApi";
 
 export default function Login() {
-   const [login, { data, isLoading, isError, error }] = useLoginMutation();
+   const [login, { isLoading, isError, error, isSuccess }] = useLoginMutation();
+   const navigate = useNavigate();
    const [formData, setFormData] = useState({
       email: "",
       password: "",
@@ -18,6 +19,13 @@ export default function Login() {
          password: "",
       });
    };
+
+   useEffect(() => {
+      if (isSuccess) {
+         resetForm();
+         navigate("/inbox");
+      }
+   }, [isSuccess, navigate]);
 
    // handle input changes
    const handleInputChange = (e) => {
@@ -34,7 +42,6 @@ export default function Login() {
    const handleSubmit = (e) => {
       e.preventDefault();
       login(formData);
-      resetForm();
    };
 
    return (
@@ -111,7 +118,7 @@ export default function Login() {
                      </button>
                   </div>
 
-                  {isError && <Error message={error} />}
+                  {isError && <Error message={error?.data} />}
                </form>
             </div>
          </div>

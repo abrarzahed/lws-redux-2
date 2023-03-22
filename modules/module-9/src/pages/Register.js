@@ -1,12 +1,13 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
 import Error from "../components/ui/Error";
 import { useRegisterMutation } from "../features/auth/authApi";
 
 export default function Register() {
-   const [register, { data, isLoading, isError, error }] =
+   const [register, { isLoading, isError, error, isSuccess }] =
       useRegisterMutation();
+   const navigate = useNavigate();
 
    const [formData, setFormData] = useState({
       name: "",
@@ -27,6 +28,13 @@ export default function Register() {
       });
    };
 
+   useEffect(() => {
+      if (isSuccess) {
+         resetForm();
+         navigate("/inbox");
+      }
+   }, [isSuccess, navigate]);
+
    // handle input changes
    const handleInputChange = (e) => {
       const { name, value, type, checked } = e.target;
@@ -46,8 +54,6 @@ export default function Register() {
          email: formData.email,
          password: formData.password,
       });
-
-      resetForm();
    };
 
    return (
@@ -167,7 +173,7 @@ export default function Register() {
                         Sign up
                      </button>
                   </div>
-                  {isError && <Error message={error} />}
+                  {isError && <Error message={error?.data} />}
                </form>
             </div>
          </div>
