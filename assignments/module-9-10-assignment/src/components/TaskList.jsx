@@ -5,7 +5,6 @@ import Task from "./Task";
 export default function TaskList() {
   const { data: tasks, isLoading, isError } = useGetTasksQuery();
   const { projects } = useSelector((state) => state.projects);
-  console.log(projects);
 
   return !isLoading && !isError && tasks?.length > 0 ? (
     <div className="lws-task-list">
