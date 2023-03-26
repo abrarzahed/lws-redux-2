@@ -893,11 +893,13 @@ form input {
 /* Team */
 
 .team-avater {
-  height: 2rem;
-  width: 2rem;
-  border-radius: 9999px;
-  -o-object-fit: cover;
-  object-fit: cover;
+  background: #ddd;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 2px solid #03a736;
+  /* -o-object-fit: cover; */
+  /* object-fit: cover; */
 }
 
 .lws-task-list {
