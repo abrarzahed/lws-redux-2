@@ -1,9 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useGetUserQuery } from "../../features/users/usersApi";
 import { isValidEmail } from "../../utils/isValidEmail";
+import Error from "../ui/Error";
 
 export default function Modal({ open, control }) {
    const [to, setTo] = useState("");
    const [message, setMessage] = useState("");
+   const [userCheck, setUserCheck] = useState(false);
+
+   const { email: authUserEmail, name: authUserName } =
+      useSelector((state) => state.auth) || {};
+
+   const { data: participant } = useGetUserQuery(to, {
+      skip: !userCheck,
+   });
+
+   useEffect(() => {
+      if (participant?.length > 0) {
+         // check conversation existence
+      }
+   }, [participant]);
 
    const debounceHandler = (fn, delay) => {
       let timeoutId;
@@ -18,6 +35,7 @@ export default function Modal({ open, control }) {
    const doSearch = (value) => {
       if (isValidEmail(value)) {
          // check user API
+         setUserCheck(true);
          setTo(value);
       }
    };
@@ -77,7 +95,12 @@ export default function Modal({ open, control }) {
                      </button>
                   </div>
 
-                  {/* <Error message="There was an error" /> */}
+                  {participant?.length === 0 && (
+                     <Error message="This user does not exist!" />
+                  )}
+                  {participant?.[0]?.email === authUserEmail && (
+                     <Error message="You cant send message to yourself" />
+                  )}
                </form>
             </div>
          </>
