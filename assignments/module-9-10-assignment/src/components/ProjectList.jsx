@@ -1,8 +1,26 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useGetProjectsQuery } from "../features/projects/projectsApi";
+import { projectAdded } from "../features/projects/projectsSlice";
 import Project from "./Project";
 
 export default function ProjectList() {
-  const { data: projects, isLoading, isError } = useGetProjectsQuery();
+  const {
+    data: projects,
+    isLoading,
+    isError,
+    isSuccess,
+  } = useGetProjectsQuery();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    projects?.forEach((project) => {
+      if (isSuccess) {
+        dispatch(projectAdded(project.projectName));
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, dispatch]);
 
   // decide what to render
   let content;
@@ -13,9 +31,9 @@ export default function ProjectList() {
   } else if (!isLoading && !isError && projects?.length === 0) {
     content = <div className="checkbox-container">No projects found!</div>;
   } else {
-    content = projects.map((project) => (
-      <Project key={project.id} project={project} />
-    ));
+    content = projects.map((project) => {
+      return <Project key={project.id} project={project} />;
+    });
   }
 
   return (

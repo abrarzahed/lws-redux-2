@@ -2,7 +2,7 @@ import DeleteSvg from "./DeleteSvg";
 import EditSvg from "./EditSvg";
 import userLogo from "../assets/images/avatars/ferdous.png";
 import { Link } from "react-router-dom";
-export default function Task() {
+export default function Task({ task = {} }) {
   return (
     <div className="lws-task">
       <div className="flex items-center gap-2 text-slate">
@@ -11,8 +11,10 @@ export default function Task() {
       </div>
 
       <div className="lws-taskContainer">
-        <h1 className="lws-task-title">Last over need 15 runs</h1>
-        <span className="lws-task-badge color-scoreboard">Scoreboard</span>
+        <h1 className="lws-task-title">{task.taskName}</h1>
+        <span className="lws-task-badge color-scoreboard">
+          {task.project.projectName}
+        </span>
       </div>
 
       <div className="flex items-center gap-4">
