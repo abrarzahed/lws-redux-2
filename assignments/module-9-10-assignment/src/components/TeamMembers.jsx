@@ -6,7 +6,7 @@ export default function TeamMembers() {
   // decide what to render
   let content;
   if (isLoading) {
-    content = <div className="checkbox-container">Loading</div>;
+    content = <div className="checkbox-container">Loading...</div>;
   } else if (!isLoading && isError) {
     content = <div className="checkbox-container">{error.data}</div>;
   } else if (!isLoading && !isError && team?.length === 0) {

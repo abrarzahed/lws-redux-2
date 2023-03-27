@@ -16,8 +16,8 @@ export default function TaskList() {
             return false;
           }
         })
-        .map((task) => {
-          return <Task key={task.id} task={task} />;
+        .map((task, i) => {
+          return <Task key={i} task={task} />;
         })}
     </div>
   ) : isLoading ? (

@@ -83,7 +83,7 @@
       },
       "deadline": "2023-03-15",
       "id": 1,
-      "status": "inProgress"
+      "status": "pending"
     },
     {
       "taskName": "Task Two",
@@ -98,7 +98,8 @@
         "colorClass": "color-flight"
       },
       "deadline": "2023-04-23",
-      "id": 2
+      "id": 2,
+      "status": "pending"
     },
     {
       "taskName": "Task Three",
@@ -113,7 +114,8 @@
         "colorClass": "color-productCart"
       },
       "deadline": "2023-05-03",
-      "id": 3
+      "id": 3,
+      "status": "pending"
     },
     {
       "taskName": "New Task",
@@ -128,7 +130,8 @@
         "colorClass": "color-scoreboard"
       },
       "deadline": "2023-03-11",
-      "id": 4
+      "id": 4,
+      "status": "inProgress"
     },
     {
       "taskName": "Fix a bug",
@@ -144,7 +147,23 @@
         "colorClass": "color-bookstore"
       },
       "id": 5,
-      "status": "completed"
+      "status": "pending"
+    },
+    {
+      "taskName": "New task of Zahed",
+      "teamMember": {
+        "name": "Sumit Saha",
+        "avatar": "/images/avatars/sumit.png",
+        "id": 1
+      },
+      "project": {
+        "id": 2,
+        "projectName": "Flight Booking",
+        "colorClass": "color-flight"
+      },
+      "deadline": "2023-03-08",
+      "status": "pending",
+      "id": 6
     }
   ]
 }

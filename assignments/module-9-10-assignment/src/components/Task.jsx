@@ -1,10 +1,18 @@
 import DeleteSvg from "./DeleteSvg";
 import EditSvg from "./EditSvg";
-import userLogo from "../assets/images/avatars/ferdous.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import {
+  useDeleteTaskMutation,
+  useUpdateTaskMutation,
+} from "../features/tasks/tasksApi";
+
 export default function Task({ task = {} }) {
-  // const memberAvatar = `../assets/${task?.teamMember?.avatar}`;
+  const [updateTask, { data: updatedTask, isError, isLoading, isSuccess }] =
+    useUpdateTaskMutation();
+
+  const [deleteTask, {}] = useDeleteTaskMutation();
+
   const months = [
     "january",
     "February",
@@ -20,12 +28,19 @@ export default function Task({ task = {} }) {
     "December",
   ];
 
-  const [status, setStatus] = useState("pending");
+  const [status, setStatus] = useState(task?.status);
 
   // handle input Change
   const handleInputChange = (e) => {
     setStatus(e.target.value);
+    updateTask({ ...task, status: e.target.value });
   };
+
+  // handle delete task
+  const handleDeleteTask = () => {
+    deleteTask(task.id);
+  };
+
   return (
     <div className="lws-task">
       <div className="flex items-center gap-2 text-slate">
@@ -47,11 +62,13 @@ export default function Task({ task = {} }) {
           <div className="team-avater" alt="user"></div>
           <p className="lws-task-assignedOn">{task?.teamMember?.name}</p>
         </div>
-        {/* <!-- delete button will not shown to the ui, until the status of the task will be completed --> */}
-        <button className="lws-delete">
-          <DeleteSvg />
-        </button>
-        <Link to={`/tasks/edit-task/${2}`} className="lws-edit">
+        {/* delete button will not shown to the ui, until the status of the task will be completed  */}
+        {task?.status === "complete" && (
+          <button className="lws-delete" onClick={handleDeleteTask}>
+            <DeleteSvg />
+          </button>
+        )}
+        <Link to={`/tasks/edit-task/${task.id}`} className="lws-edit">
           <EditSvg />
         </Link>
         <select

@@ -1032,6 +1032,7 @@ form .fieldContainer label {
   margin-left: auto;
   width: 8rem;
   cursor: pointer;
+  background: #000;
 }
 
 .lws-submit:hover {
