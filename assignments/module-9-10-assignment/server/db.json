@@ -157,9 +157,9 @@
         "id": 1
       },
       "project": {
-        "id": 2,
-        "projectName": "Flight Booking",
-        "colorClass": "color-flight"
+        "id": 5,
+        "projectName": "Blog Application",
+        "colorClass": "color-blog"
       },
       "deadline": "2023-03-08",
       "status": "pending",

@@ -8,6 +8,11 @@ export const tasksApi = apiSlice.injectEndpoints({
         url: `/tasks`,
       }),
     }),
+    getTask: builder.query({
+      query: (id) => ({
+        url: `/tasks/${id}`,
+      }),
+    }),
 
     addTask: builder.mutation({
       query: (data) => ({
@@ -82,4 +87,5 @@ export const {
   useUpdateTaskMutation,
   useDeleteTaskMutation,
   useAddTaskMutation,
+  useGetTaskQuery,
 } = tasksApi;
