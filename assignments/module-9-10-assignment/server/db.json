@@ -93,9 +93,9 @@
         "id": 3
       },
       "project": {
-        "id": 2,
-        "projectName": "Flight Booking",
-        "colorClass": "color-flight"
+        "id": 6,
+        "projectName": "Job Finder",
+        "colorClass": "color-jobFinder"
       },
       "deadline": "2023-04-23",
       "id": 2,

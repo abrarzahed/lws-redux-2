@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   projects: [],
+  searchTerm: "",
 };
 
 const projectsSlice = createSlice({
@@ -14,8 +15,12 @@ const projectsSlice = createSlice({
     projectRemoved: (state, action) => {
       state.projects = state.projects.filter((p) => p !== action.payload);
     },
+    searchTermUpdated: (state, action) => {
+      state.searchTerm = action.payload;
+    },
   },
 });
 
-export const { projectAdded, projectRemoved } = projectsSlice.actions;
+export const { projectAdded, projectRemoved, searchTermUpdated } =
+  projectsSlice.actions;
 export default projectsSlice.reducer;

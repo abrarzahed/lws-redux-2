@@ -755,6 +755,7 @@ form input {
     var(--tw-shadow, 0 0 #0000);
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(226 232 240 / var(--tw-ring-opacity));
+  color: #777;
 }
 
 .search-input::-moz-placeholder {
@@ -769,7 +770,7 @@ form input {
 
 .search-input::placeholder {
   --tw-text-opacity: 1;
-  color: rgb(100 116 139 / var(--tw-text-opacity));
+  color: rgb(100 116 139 / 0.4);
 }
 
 .search-input:focus {
