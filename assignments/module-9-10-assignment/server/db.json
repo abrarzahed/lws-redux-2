@@ -131,7 +131,7 @@
       },
       "deadline": "2023-03-11",
       "id": 4,
-      "status": "inProgress"
+      "status": "pending"
     },
     {
       "taskName": "Fix a bug",
