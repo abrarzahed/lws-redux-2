@@ -1,7 +1,6 @@
 import { createSelector } from "reselect";
 
 export const selectAllVideos = (state) => {
-  console.log("Running all videos");
   return state.videos.videos;
 };
 
@@ -27,10 +26,11 @@ export const selectMemoisedUnwatchedVideos = createSelector(
   }
 );
 
-export const selectMemoisedFilteredVideos = createSelector(
-  selectAllVideos,
-  (state, filter) => filter,
-  (allVideos, filter) => {
-    return allVideos.filter((video) => video.watched === filter);
-  }
-);
+export const selectMemoisedFilteredVideos = () =>
+  createSelector(
+    selectAllVideos,
+    (state, filter) => filter,
+    (allVideos, filter) => {
+      return allVideos.filter((video) => video.watched === filter);
+    }
+  );
